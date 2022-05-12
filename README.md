@@ -1,8 +1,40 @@
-## sbt project compiled with Scala 3
+# web3j-rlp-playground
 
-### Usage
+## 快速开始
+参见单元测试 [HelloWorld.scala](./src/test/scala/HelloWorld.scala)。
 
-This is a normal sbt project. You can compile code with `sbt compile`, run it with `sbt run`, and `sbt console` will start a Scala 3 REPL.
+## 温馨提示
 
-For more information on the sbt-dotty plugin, see the
-[scala3-example-project](https://github.com/scala/scala3-example-project/blob/main/README.md).
+### 1. java 类型和 RLP 类型的映射关系
+
+```java
+public class Hello {
+	public String x;
+	public World[] worlds;
+}
+
+public class World {
+	public String[] y;
+}
+```
+
+如上 `Hello` 类型会按以下 RLP 类型（`org.web3j.rlp.RlpType`）编码
+
+```java
+RlpList {
+  values: {
+    RlpString, // x
+    RlpList {  // worlds
+      values: {
+        RlpList {
+          values: RlpString, // y
+        },
+      },
+    },
+  },
+}
+```
+
+### 2. RlpDecoder 的返回结果是 RlpList
+
+`[String, String]` 编码后的解码结果为 `[[String, String]]`。
