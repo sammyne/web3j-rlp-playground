@@ -1,0 +1,12 @@
+# Metals
+.metals/
+.ammonite/
+**/target/
+**/.bloop/
+**/.bsp/
+
+**/metals.sbt
+
+
+/project/project
+ 
